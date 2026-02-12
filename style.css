@@ -31,6 +31,10 @@ body {
     min-width: 40vw;
     max-width: 40vw;
   }
+
+  .score {
+    font-size: 2.25rem;
+  }
 }
 
 h1 {
