@@ -84,7 +84,7 @@ h1 {
 
 button {
   font-family: inherit;
-  font-size: 1rem;
+  font-size: 24px;
   font-weight: 600;
   border: none;
   border-radius: 10px;
@@ -209,6 +209,6 @@ button:active {
     flex: 1;
     min-width: 0;
     padding: 0.5rem 0.25rem;
-    font-size: 0.9rem;
+    font-size: 18px;
   }
 }
