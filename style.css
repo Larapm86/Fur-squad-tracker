@@ -183,7 +183,7 @@ button:active {
     padding: 1.5rem 1rem;
   }
 
-  .header-image-placeholder {
+  .header-media-wrap .header-image-placeholder {
     width: 44vw;
     min-width: 44vw;
     max-width: 44vw;
