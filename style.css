@@ -192,12 +192,12 @@ button:active {
   }
 
   .player h2 {
-    font-size: 18px;
+    font-size: 16px;
     margin: 0 0 0.35rem;
   }
 
   .score {
-    font-size: 32px;
+    font-size: 40px;
     margin: 0 0 0.5rem;
   }
 
