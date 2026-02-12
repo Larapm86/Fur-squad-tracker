@@ -153,6 +153,7 @@ button:active {
 }
 
 .btn-reset {
+  font-size: 18px;
   background: transparent;
   color: #666;
   border: 1px solid #ccc;
@@ -212,7 +213,4 @@ button:active {
     font-size: 18px;
   }
 
-  .btn-reset {
-    font-size: 1rem;
-  }
 }
