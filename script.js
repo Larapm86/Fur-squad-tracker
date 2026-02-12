@@ -25,15 +25,24 @@ function loadScores() {
 }
 
 const bravoWrapEl = document.getElementById('bravo-wrap');
+const headerImageEl = document.getElementById('header-image');
+const headerVideoEl = document.getElementById('header-video');
 
 function displayScores() {
   scoreAEl.textContent = scoreA;
   scoreBEl.textContent = scoreB;
   saveScores();
-  if (scoreA === 7 && scoreB === 7) {
-    bravoWrapEl.hidden = false;
+  const isBravo = scoreA === 7 && scoreB === 7;
+  bravoWrapEl.hidden = !isBravo;
+  if (isBravo) {
+    headerImageEl.hidden = true;
+    headerVideoEl.hidden = false;
+    headerVideoEl.play().catch(() => {});
   } else {
-    bravoWrapEl.hidden = true;
+    headerImageEl.hidden = false;
+    headerVideoEl.hidden = true;
+    headerVideoEl.pause();
+    headerVideoEl.currentTime = 0;
   }
 }
 

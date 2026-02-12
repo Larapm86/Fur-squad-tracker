@@ -12,7 +12,12 @@
 <body>
   <h1>Fur Squad Tracker</h1>
   <p class="subheadline">Every tap = one more furry friend spotted!<br>Think you can catch them all?</p>
-  <img src="https://i.pinimg.com/1200x/cd/dd/82/cddd82848db93035b55cd85312e11cfe.jpg" alt="Score Keeper" class="header-image-placeholder">
+  <div class="header-media-wrap">
+    <img src="https://i.pinimg.com/1200x/cd/dd/82/cddd82848db93035b55cd85312e11cfe.jpg" alt="Score Keeper" class="header-image-placeholder" id="header-image">
+    <video class="header-image-placeholder header-video" id="header-video" muted loop playsinline aria-hidden="true" hidden>
+      <source src="bravo-animation.mp4" type="video/mp4">
+    </video>
+  </div>
   <div class="bravo-wrap" id="bravo-wrap" hidden>
     <img src="https://i0.wp.com/acegif.com/wp-content/gif/confetti-40.gif" alt="" class="bravo-confetti" aria-hidden="true">
     <p class="bravo-message" id="bravo-message" aria-live="polite">Bravo!</p>
