@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Score Keeper</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <img src="https://i.pinimg.com/1200x/cd/dd/82/cddd82848db93035b55cd85312e11cfe.jpg" alt="Score Keeper" class="header-image-placeholder">
+  <h1>Fur Squad Tracker</h1>
+  <p class="subheadline">Every tap = one more furry friend spotted!<br>Think you can catch them all?</p>
+  <div class="bravo-wrap" id="bravo-wrap" hidden>
+    <img src="https://i0.wp.com/acegif.com/wp-content/gif/confetti-40.gif" alt="" class="bravo-confetti" aria-hidden="true">
+    <p class="bravo-message" id="bravo-message" aria-live="polite">Bravo!</p>
+  </div>
+  <div class="score-board">
+    <section class="player" aria-labelledby="team-b-heading">
+      <h2 id="team-b-heading">Cats</h2>
+      <p class="score" id="score2">0</p>
+      <div class="controls">
+        <button class="btn-subtract" id="minus2" aria-label="Cats subtract 1">−</button>
+        <button class="btn-add" id="plus2" aria-label="Cats add 1">+</button>
+      </div>
+    </section>
+    <section class="player" aria-labelledby="team-a-heading">
+      <h2 id="team-a-heading">Dogs</h2>
+      <p class="score" id="score1">0</p>
+      <div class="controls">
+        <button class="btn-subtract" id="minus1" aria-label="Dogs subtract 1">−</button>
+        <button class="btn-add" id="plus1" aria-label="Dogs add 1">+</button>
+      </div>
+    </section>
+  </div>
+  <div class="reset-wrap">
+    <button class="btn-reset" id="reset">Reset</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

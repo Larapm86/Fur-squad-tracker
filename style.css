@@ -1,0 +1,166 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Outfit', sans-serif;
+  background: #fff;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+}
+
+.header-image-placeholder {
+  display: block;
+  width: 15vw;
+  min-width: 15vw;
+  max-width: 15vw;
+  height: auto;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+}
+
+h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin: 0 0 0.5rem;
+  color: #222;
+}
+
+.subheadline {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #666;
+  margin: 0 0 2.5rem;
+  text-align: center;
+  max-width: 360px;
+}
+
+.score-board {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 560px;
+}
+
+.player {
+  background: #f8f8f8;
+  border: 1px solid #e0e0e0;
+  border-radius: 16px;
+  padding: 2rem 2.25rem;
+  min-width: 200px;
+  text-align: center;
+}
+
+.player h2 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0 0 1.25rem;
+  color: #666;
+}
+
+.score {
+  font-size: 3.25rem;
+  font-weight: 700;
+  margin: 0 0 1.5rem;
+  color: #222;
+  line-height: 1;
+}
+
+.controls {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+button {
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  padding: 0.6rem 1.25rem;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+button:active {
+  transform: scale(0.96);
+}
+
+.btn-add {
+  background: #e94560;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(233, 69, 96, 0.35);
+}
+
+.btn-add:hover {
+  background: #ff6b6b;
+  box-shadow: 0 4px 12px rgba(233, 69, 96, 0.45);
+}
+
+.btn-subtract {
+  background: #e0e0e0;
+  color: #333;
+}
+
+.btn-subtract:hover {
+  background: #d0d0d0;
+}
+
+.bravo-wrap {
+  margin: 0 0 1.5rem;
+  min-height: 2.5rem;
+  text-align: center;
+  position: relative;
+}
+
+.bravo-wrap[hidden] {
+  visibility: hidden;
+  display: block;
+}
+
+.bravo-confetti {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.bravo-message {
+  position: relative;
+  z-index: 10000;
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #e94560;
+}
+
+.reset-wrap {
+  margin-top: 2.5rem;
+}
+
+.btn-reset {
+  background: transparent;
+  color: #666;
+  border: 1px solid #ccc;
+  padding: 0.5rem 1.25rem;
+}
+
+.btn-reset:hover {
+  color: #333;
+  border-color: #999;
+  background: #f0f0f0;
+}
