@@ -32,6 +32,18 @@ body {
     max-width: 40vw;
   }
 
+  .score-board {
+    flex-wrap: nowrap;
+    gap: 1rem;
+    max-width: 100%;
+  }
+
+  .player {
+    min-width: 0;
+    flex: 1;
+    padding: 1.25rem 1rem;
+  }
+
   .score {
     font-size: 2.25rem;
   }
