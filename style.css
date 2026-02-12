@@ -201,11 +201,14 @@ button:active {
   }
 
   .controls {
-    gap: 0.35rem;
+    gap: 16px;
+    width: 100%;
   }
 
   .score-board .controls button {
-    padding: 0.35rem 0.6rem;
-    font-size: 0.85rem;
+    flex: 1;
+    min-width: 0;
+    padding: 0.5rem 0.25rem;
+    font-size: 0.9rem;
   }
 }
