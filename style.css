@@ -25,6 +25,14 @@ body {
   margin-bottom: 1.5rem;
 }
 
+@media (max-width: 768px) {
+  .header-image-placeholder {
+    width: 40vw;
+    min-width: 40vw;
+    max-width: 40vw;
+  }
+}
+
 h1 {
   font-size: 1.75rem;
   font-weight: 700;
