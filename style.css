@@ -172,9 +172,9 @@ button:active {
   }
 
   .header-image-placeholder {
-    width: 40vw;
-    min-width: 40vw;
-    max-width: 40vw;
+    width: 44vw;
+    min-width: 44vw;
+    max-width: 44vw;
   }
 
   .score-board {
