@@ -211,4 +211,8 @@ button:active {
     padding: 0.5rem 0.25rem;
     font-size: 18px;
   }
+
+  .btn-reset {
+    font-size: 1rem;
+  }
 }
