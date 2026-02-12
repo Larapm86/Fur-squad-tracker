@@ -32,7 +32,7 @@ function displayScores() {
   scoreAEl.textContent = scoreA;
   scoreBEl.textContent = scoreB;
   saveScores();
-  const isBravo = scoreA === 7 && scoreB === 7;
+  const isBravo = scoreA === 8 && scoreB === 6; /* 8 dogs, 6 cats */
   bravoWrapEl.hidden = !isBravo;
   if (isBravo) {
     headerImageEl.hidden = true;
