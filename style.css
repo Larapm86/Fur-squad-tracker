@@ -101,15 +101,18 @@ body.end-screen .game-slot-play {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  overflow: visible;
 }
 
-/* Message stays above the gif and never collapses into it */
+/* Message stays above the gif, one line, not truncated */
 body.end-screen .game-slot-play .end-screen-message {
   order: 1;
   flex-shrink: 0;
   margin: 0 0 0.75rem;
-  padding: 0;
+  padding: 0 0.25rem;
   min-height: 2.5em;
+  white-space: nowrap;
+  overflow: visible;
 }
 
 body.end-screen .game-slot-play .header-image-slot {
@@ -126,6 +129,10 @@ body.end-screen .header-image-slot .header-image-placeholder:not([hidden]) {
 
 body.end-screen .game-slot-play .header-countdown-wrap {
   order: 3;
+}
+
+body.end-screen .game-slot {
+  overflow: visible;
 }
 
 /* 3, 2, 1 countdown centered in the middle of the slot */
@@ -398,12 +405,14 @@ button:disabled {
 .end-screen-message {
   display: block;
   font-family: 'Press Start 2P', cursive;
-  font-size: 0.75rem;
+  font-size: 0.6rem;
   text-align: center;
   color: #333;
-  line-height: 1.6;
+  line-height: 1.5;
   margin: 0 0 0.75rem;
-  padding: 0;
+  padding: 0 0.25rem;
+  white-space: nowrap;
+  overflow: visible;
 }
 
 .all-done-message[hidden],
