@@ -70,14 +70,13 @@ const GUESS_HOLD_MS = 1500;
 const CAT_GUESS_MESSAGES = ['Purrfect!', 'Meow-velous!', 'Kitty-approved!'];
 const DOG_GUESS_MESSAGES = ['Woof-tastic!', 'Bark yeah!', 'Paw-some!'];
 
-function moveProgressBarToTop() {
-  if (topBarSlotEl && headerCountdownEl) topBarSlotEl.appendChild(headerCountdownEl);
-  if (topBarSlotEl && guessSuccessEl) topBarSlotEl.appendChild(guessSuccessEl);
-}
-
 function moveProgressBarToGameSlot() {
-  if (gameSlotPlayEl && headerCountdownEl) gameSlotPlayEl.appendChild(headerCountdownEl);
-  if (gameSlotPlayEl && guessSuccessEl) gameSlotPlayEl.appendChild(guessSuccessEl);
+  const wrap = headerCountdownEl && headerCountdownEl.parentElement;
+  if (wrap && wrap.classList && wrap.classList.contains('header-countdown-wrap') && gameSlotPlayEl) {
+    if (wrap.parentElement !== gameSlotPlayEl) gameSlotPlayEl.appendChild(wrap);
+  } else if (gameSlotPlayEl && headerCountdownEl) {
+    gameSlotPlayEl.appendChild(headerCountdownEl);
+  }
 }
 
 function setCountersActiveState() {
@@ -421,8 +420,6 @@ function startGame() {
     phaseDogDelta = 0;
     if (gameSlotPreEl) gameSlotPreEl.hidden = true;
     if (gameSlotPlayEl) gameSlotPlayEl.hidden = false;
-    moveProgressBarToTop();
-    if (topBarSlotEl) topBarSlotEl.hidden = false;
     headerImageEls.forEach(el => { el.hidden = true; });
     headerCatEl.hidden = false;
     headerCountdownEl.hidden = false;
