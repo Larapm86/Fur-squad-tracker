@@ -30,7 +30,7 @@ const headerDogEl = document.getElementById('header-dog');
 const headerDog2El = document.getElementById('header-dog2');
 const headerCuteCatEl = document.getElementById('header-cute-cat');
 const headerAnnoyingDogEl = document.getElementById('header-annoying-dog');
-const headerNyanCatEl = document.getElementById('header-nyan-cat');
+const headerBlackCatEl = document.getElementById('header-black-cat');
 const headerPlantEl = document.getElementById('header-plant');
 const headerCatnapEl = document.getElementById('header-catnap');
 const headerCatMadEl = document.getElementById('header-cat-mad');
@@ -45,8 +45,10 @@ const failureMessageEl = document.getElementById('failure-message');
 const startWrapEl = document.getElementById('start-wrap');
 const resetWrapEl = document.getElementById('reset-wrap');
 const countdownOverlayEl = document.getElementById('countdown-overlay');
+const headlineEl = document.getElementById('headline');
+const subheadlineEl = document.getElementById('subheadline');
 
-const headerImageEls = [headerCatEl, headerDogEl, headerDog2El, headerCuteCatEl, headerAnnoyingDogEl, headerNyanCatEl];
+const headerImageEls = [headerCatEl, headerDogEl, headerDog2El, headerCuteCatEl, headerAnnoyingDogEl, headerBlackCatEl];
 let gameStarted = false;
 let headerPhase = -1; /* -1 = pre-game (3-2-1 countdown), 0-5 = phases, 6 = all done */
 let allPhasesCorrectGuess = true; /* false if any phase was advanced by timeout */
@@ -72,6 +74,9 @@ function displayScores() {
   bravoWrapEl.hidden = !isBravo;
   if (isBravo) {
     headerImageEls.forEach(el => { el.hidden = true; });
+    headerPlantEl.hidden = true;
+    headerCatnapEl.hidden = true;
+    if (headerCatMadEl) headerCatMadEl.hidden = true;
     headerVideoEl.hidden = false;
     headerVideoEl.play().catch(() => {});
     bravoConfettiEl.hidden = false;
@@ -82,15 +87,21 @@ function displayScores() {
     headerVideoEl.currentTime = 0;
     bravoConfettiEl.hidden = true;
     if (headerPhase === 6) {
-      /* Success only when final scores are 3 dogs and 3 cats */
+      /* Success only when final scores are 3 dogs and 3 cats; else show failure (mad cat) */
       const succeeded = scoreA === 3 && scoreB === 3;
       headerPlantEl.hidden = !succeeded;
       headerCatnapEl.hidden = true;
-      headerCatMadEl.hidden = succeeded;
+      if (headerCatMadEl) {
+        if (succeeded) {
+          headerCatMadEl.setAttribute('hidden', '');
+        } else {
+          headerCatMadEl.removeAttribute('hidden');
+        }
+      }
     } else {
       headerPlantEl.hidden = true;
       headerCatnapEl.hidden = true;
-      headerCatMadEl.hidden = true;
+      if (headerCatMadEl) headerCatMadEl.setAttribute('hidden', '');
     }
     if (headerPhase === -1) {
       headerCountdownEl.hidden = true;
@@ -101,12 +112,19 @@ function displayScores() {
       });
     }
     const isAllDone = headerPhase === 6;
+    const duringCountdown = headerPhase === -1;
     /* Show success only when cats === 3 and dogs === 3; otherwise show failure (mad cat + message) */
     const succeeded = isAllDone && scoreA === 3 && scoreB === 3;
-    scoreBoardEl.hidden = isAllDone;
+    if (headlineEl) headlineEl.hidden = isAllDone;
+    if (subheadlineEl) subheadlineEl.hidden = isAllDone;
+    scoreBoardEl.hidden = isAllDone || duringCountdown;
     resetWrapEl.hidden = !isAllDone;
     allDoneMessageEl.hidden = !succeeded;
-    failureMessageEl.hidden = !isAllDone || succeeded;
+    if (isAllDone && !succeeded) {
+      failureMessageEl.removeAttribute('hidden');
+    } else {
+      failureMessageEl.hidden = true;
+    }
   }
 }
 
@@ -167,7 +185,7 @@ function doAdvanceToNextPhase() {
     runCountdown();
   } else if (headerPhase === 4) {
     headerPhase = 5;
-    headerNyanCatEl.hidden = false;
+    headerBlackCatEl.hidden = false;
     headerCountdownEl.hidden = true;
     runCountdown();
   } else {
@@ -176,7 +194,10 @@ function doAdvanceToNextPhase() {
     const succeeded = scoreA === 3 && scoreB === 3;
     headerPlantEl.hidden = !succeeded;
     headerCatnapEl.hidden = true;
-    headerCatMadEl.hidden = succeeded;
+    if (headerCatMadEl) {
+      if (succeeded) headerCatMadEl.setAttribute('hidden', '');
+      else headerCatMadEl.removeAttribute('hidden');
+    }
     headerCountdownEl.hidden = true;
     displayScores();
   }
@@ -270,13 +291,15 @@ function showPreGameUI() {
   headerImageEls.forEach(el => { el.hidden = true; });
   headerPlantEl.hidden = true;
   headerCatnapEl.hidden = true;
-  headerCatMadEl.hidden = true;
+  if (headerCatMadEl) headerCatMadEl.setAttribute('hidden', '');
   headerCountdownEl.hidden = true;
   headerCountdownFillEl.style.width = '0%';
   headerCountdownEl.setAttribute('aria-valuenow', 0);
   guessSuccessEl.hidden = true;
   countdownOverlayEl.hidden = true;
   countdownOverlayEl.textContent = '';
+  if (headlineEl) headlineEl.hidden = false;
+  if (subheadlineEl) subheadlineEl.hidden = false;
   startWrapEl.hidden = false;
   scoreBoardEl.hidden = true;
   resetWrapEl.hidden = true;
@@ -308,7 +331,7 @@ function startGame() {
   startWrapEl.hidden = true;
   gameStarted = true;
   headerPhase = -1;
-  scoreBoardEl.hidden = false;
+  scoreBoardEl.hidden = true;  /* hide counters during 3-2-1 countdown */
   resetWrapEl.hidden = true;
   displayScores();
   runStartCountdown(() => {
@@ -319,6 +342,7 @@ function startGame() {
     headerCountdownEl.hidden = false;
     headerCountdownFillEl.style.width = '0%';
     headerCountdownEl.setAttribute('aria-valuenow', 0);
+    scoreBoardEl.hidden = false;  /* show counters when game starts */
     startCountdown();
     displayScores();
   });
