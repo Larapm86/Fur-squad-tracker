@@ -264,12 +264,13 @@ h1 {
 }
 
 /* End-screen success/failure in same position and style as start-screen subheadline */
+/* Success/failure on last screen: 16px below sentence, 16px type */
 .subheadline-end {
   font-family: 'Press Start 2P', cursive;
-  font-size: 1rem;
+  font-size: 16px;
   font-weight: 400;
   color: #666;
-  margin: 0 0 2.5rem;
+  margin: 0 0 16px;
   text-align: center;
   max-width: 360px;
   line-height: 1.8;
