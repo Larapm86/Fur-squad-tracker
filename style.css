@@ -11,8 +11,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 2rem 1.5rem;
+  justify-content: flex-start;
+  padding: 2rem 1.5rem 3rem;
 }
 
 /* Single fixed-size container: Start OR countdown OR game (image + bar) */
