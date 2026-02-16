@@ -263,17 +263,18 @@ h1 {
   line-height: 1.8;
 }
 
-/* End-screen success/failure in same position and style as start-screen subheadline */
-/* Success/failure on last screen: 16px below sentence, 16px type */
+/* End-screen success/failure: responsive, never truncated, clear spacing above gif */
 .subheadline-end {
   font-family: 'Press Start 2P', cursive;
-  font-size: 16px;
+  font-size: clamp(12px, 3.5vw, 16px);
   font-weight: 400;
-  color: #666;
-  margin: 0 0 16px;
+  color: #000;
+  margin: 0 1rem 24px;
+  padding: 0 0.5rem;
   text-align: center;
-  max-width: 360px;
-  line-height: 1.8;
+  max-width: min(360px, 95vw);
+  line-height: 1.6;
+  overflow: visible;
 }
 
 .score-board {
@@ -521,6 +522,12 @@ button:disabled {
   .subheadline {
     font-size: 0.875rem;
     max-width: 320px;
+  }
+
+  .subheadline-end {
+    font-size: clamp(11px, 3vw, 14px);
+    margin: 0 0.75rem 28px;
+    max-width: min(320px, 92vw);
   }
 
   .top-bar-slot {
