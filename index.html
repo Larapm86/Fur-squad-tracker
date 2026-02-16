@@ -21,6 +21,8 @@
       <div class="countdown-overlay" id="countdown-overlay" aria-live="polite" hidden></div>
     </div>
     <div class="game-slot-play" id="game-slot-play" hidden>
+    <p class="all-done-message end-screen-message" id="all-done-message" aria-live="polite" hidden>Bloom-tastic! Now you can spin like a sunflower!</p>
+    <p class="failure-message end-screen-message" id="failure-message" aria-live="polite" hidden>Catnap over… try again! Time to claw at success</p>
     <div class="header-image-slot">
       <img src="assets/cat.png" alt="Pixel art cat" class="header-image-placeholder" id="header-cat">
       <img src="assets/dog.png" alt="Pixel art dog" class="header-image-placeholder" id="header-dog" hidden>
@@ -35,8 +37,6 @@
         <source src="assets/bravo-animation.mp4" type="video/mp4">
       </video>
       <p class="guess-success-message" id="guess-success-message" aria-live="polite" hidden></p>
-      <p class="all-done-message end-screen-overlay" id="all-done-message" aria-live="polite" hidden>Bloom-tastic! Now you can spin like a sunflower!</p>
-      <p class="failure-message end-screen-overlay" id="failure-message" aria-live="polite" hidden>Catnap over… try again! Time to claw at success</p>
     </div>
     <div class="header-countdown-wrap">
       <div class="header-countdown" id="header-countdown" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Countdown">

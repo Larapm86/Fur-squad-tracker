@@ -158,8 +158,8 @@ function displayScores() {
     /* Show success only when cats === 3 and dogs === 3; otherwise show failure (mad cat + message) */
     const succeeded = isAllDone && scoreA === 3 && scoreB === 3;
     const inPlay = headerPhase >= 0 && headerPhase <= 5;
-    if (headlineEl) headlineEl.hidden = isAllDone || inPlay;
-    if (subheadlineEl) subheadlineEl.hidden = isAllDone || inPlay;
+    if (headlineEl) headlineEl.hidden = isAllDone || inPlay || duringCountdown;
+    if (subheadlineEl) subheadlineEl.hidden = isAllDone || inPlay || duringCountdown;
     if (topBarSlotEl) topBarSlotEl.hidden = !inPlay;
     const hideScoreBoard = isAllDone || duringCountdown;
     scoreBoardEl.hidden = hideScoreBoard;
@@ -297,8 +297,9 @@ function startCountdown() {
   runCountdown();
 }
 
+/* Counters change by exactly 1 per tap (add or subtract only) */
 function incrementTeamA() {
-  scoreA++;
+  scoreA += 1;
   phaseDogDelta++;
   setCountersActiveState();
   if (headerPhase === 1 || headerPhase === 2 || headerPhase === 4) advanceToNextPhase(true);
@@ -307,7 +308,7 @@ function incrementTeamA() {
 
 function decrementTeamA() {
   if (scoreA > 0) {
-    scoreA--;
+    scoreA -= 1;
     phaseDogDelta = Math.max(0, phaseDogDelta - 1);
     setCountersActiveState();
     displayScores();
@@ -315,7 +316,7 @@ function decrementTeamA() {
 }
 
 function incrementTeamB() {
-  scoreB++;
+  scoreB += 1;
   phaseCatDelta++;
   setCountersActiveState();
   if (headerPhase === 0 || headerPhase === 3 || headerPhase === 5) advanceToNextPhase(true);
@@ -324,7 +325,7 @@ function incrementTeamB() {
 
 function decrementTeamB() {
   if (scoreB > 0) {
-    scoreB--;
+    scoreB -= 1;
     phaseCatDelta = Math.max(0, phaseCatDelta - 1);
     setCountersActiveState();
     displayScores();

@@ -145,9 +145,10 @@ body.end-screen {
   transform-origin: center center;
 }
 
-/* Wrapper reserves space when bar is hidden so layout doesn't jump */
+/* Wrapper keeps fixed height when bar is hidden so counters below don't jump */
 .header-countdown-wrap {
-  min-height: 32px;  /* 20px bar + 12px margin-top */
+  height: 32px;  /* 20px bar + 12px margin-top */
+  min-height: 32px;
   margin: 0 0 0;
 }
 
@@ -222,12 +223,13 @@ h1 {
   flex-wrap: wrap;
   justify-content: center;
   max-width: 560px;
+  min-height: 200px;  /* stable height so counters don't jump when success overlay shows */
 }
 
 /* Pixel style counter */
 .player {
   font-family: 'Press Start 2P', cursive;
-  background: #e8e8e8;
+  background: #fff;
   border: 3px solid #333;
   border-radius: 0;
   padding: 1.5rem 1.5rem;
@@ -284,12 +286,12 @@ button:disabled {
 }
 
 .btn-add {
-  background: #e94560;
+  background: #2d7a6e;
   color: #fff;
 }
 
 .btn-add:hover {
-  background: #ff6b6b;
+  background: #3a8f82;
 }
 
 .btn-add:active {
@@ -298,12 +300,24 @@ button:disabled {
 }
 
 .btn-subtract {
-  background: #b0b0b0;
-  color: #333;
+  background: #5a5a5a;
+  color: #fff;
+  border: 3px solid #333;
+  -webkit-text-stroke: 1px currentColor;
+  paint-order: stroke fill;
 }
 
 .btn-subtract:hover {
-  background: #c0c0c0;
+  background: #6b6b6b;
+}
+
+.btn-subtract:focus {
+  outline: none;
+}
+
+.btn-subtract:focus-visible {
+  outline: 2px solid #333;
+  outline-offset: 2px;
 }
 
 .btn-subtract:active {
@@ -323,23 +337,15 @@ button:disabled {
   display: none;
 }
 
-/* End-screen messages overlay the image (success = plant, failure = cat-mad) */
-.header-image-slot .end-screen-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-  padding: 0.75rem;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 12px;
+/* End-screen messages sit above the image (success = plant, failure = cat-mad) */
+.end-screen-message {
   font-family: 'Press Start 2P', cursive;
   font-size: 0.75rem;
   text-align: center;
   color: #333;
   line-height: 1.6;
+  margin: 0 0 0.75rem;
+  padding: 0;
 }
 
 .all-done-message[hidden],
