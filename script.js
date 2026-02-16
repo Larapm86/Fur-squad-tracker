@@ -27,6 +27,7 @@ function loadScores() {
 const bravoWrapEl = document.getElementById('bravo-wrap');
 const headerImageEl = document.getElementById('header-image');
 const headerVideoEl = document.getElementById('header-video');
+const bravoConfettiEl = document.getElementById('bravo-confetti');
 
 function displayScores() {
   scoreAEl.textContent = scoreA;
@@ -38,11 +39,13 @@ function displayScores() {
     headerImageEl.hidden = true;
     headerVideoEl.hidden = false;
     headerVideoEl.play().catch(() => {});
+    bravoConfettiEl.hidden = false;
   } else {
     headerImageEl.hidden = false;
     headerVideoEl.hidden = true;
     headerVideoEl.pause();
     headerVideoEl.currentTime = 0;
+    bravoConfettiEl.hidden = true;
   }
 }
 

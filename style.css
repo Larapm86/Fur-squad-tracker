@@ -37,21 +37,36 @@ body {
   object-fit: cover;
 }
 
+.header-video:not([hidden]) {
+  position: relative;
+  z-index: 100;
+}
+
+.header-cloud-dog {
+  display: block;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.08));
+}
+
 h1 {
-  font-size: 1.75rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  margin: 0 0 0.5rem;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1.25rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  margin: 0 0 0.75rem;
   color: #222;
+  line-height: 1.6;
+  text-align: center;
 }
 
 .subheadline {
-  font-size: 1rem;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 16px;
   font-weight: 400;
   color: #666;
   margin: 0 0 2.5rem;
   text-align: center;
   max-width: 360px;
+  line-height: 1.8;
 }
 
 .score-board {
@@ -62,30 +77,35 @@ h1 {
   max-width: 560px;
 }
 
+/* Pixel style counter */
 .player {
-  background: #f8f8f8;
-  border: 1px solid #e0e0e0;
-  border-radius: 16px;
-  padding: 2rem 2.25rem;
+  font-family: 'Press Start 2P', cursive;
+  background: #e8e8e8;
+  border: 3px solid #333;
+  border-radius: 0;
+  padding: 1.5rem 1.5rem;
   min-width: 200px;
   text-align: center;
+  box-shadow: 4px 4px 0 #333;
 }
 
 .player h2 {
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-size: 0.6rem;
+  font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin: 0 0 1.25rem;
-  color: #666;
+  letter-spacing: 0.02em;
+  margin: 0 0 1rem;
+  color: #333;
+  line-height: 1.6;
 }
 
 .score {
-  font-size: 3.25rem;
-  font-weight: 700;
-  margin: 0 0 1.5rem;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 2.25rem;
+  font-weight: 400;
+  margin: 0 0 1rem;
   color: #222;
-  line-height: 1;
+  line-height: 1.5;
 }
 
 .controls {
@@ -95,38 +115,47 @@ h1 {
 }
 
 button {
-  font-family: inherit;
-  font-size: 24px;
-  font-weight: 600;
-  border: none;
-  border-radius: 10px;
-  padding: 0.6rem 1.25rem;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 18px;
+  font-weight: 400;
+  border: 3px solid #333;
+  border-radius: 0;
+  padding: 0.6rem 1rem;
   cursor: pointer;
-  transition: transform 0.15s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.2s ease;
+  box-shadow: 3px 3px 0 #333;
 }
 
 button:active {
-  transform: scale(0.96);
+  transform: translateY(2px);
 }
 
 .btn-add {
   background: #e94560;
   color: #fff;
-  box-shadow: 0 2px 8px rgba(233, 69, 96, 0.35);
 }
 
 .btn-add:hover {
   background: #ff6b6b;
-  box-shadow: 0 4px 12px rgba(233, 69, 96, 0.45);
+}
+
+.btn-add:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 #333;
 }
 
 .btn-subtract {
-  background: #e0e0e0;
+  background: #b0b0b0;
   color: #333;
 }
 
 .btn-subtract:hover {
-  background: #d0d0d0;
+  background: #c0c0c0;
+}
+
+.btn-subtract:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 #333;
 }
 
 .bravo-wrap {
@@ -151,13 +180,19 @@ button:active {
   pointer-events: none;
 }
 
+.bravo-confetti[hidden] {
+  display: none !important;
+}
+
 .bravo-message {
+  font-family: 'Press Start 2P', cursive;
   position: relative;
   z-index: 10000;
   margin: 0;
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-size: 1rem;
+  font-weight: 400;
   color: #e94560;
+  line-height: 1.6;
 }
 
 .reset-wrap {
@@ -165,22 +200,37 @@ button:active {
 }
 
 .btn-reset {
-  font-size: 18px;
-  background: transparent;
-  color: #666;
-  border: 1px solid #ccc;
-  padding: 0.5rem 1.25rem;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+  background: #e8e8e8;
+  color: #333;
+  border: 3px solid #333;
+  border-radius: 0;
+  padding: 0.5rem 1rem;
+  box-shadow: 3px 3px 0 #333;
 }
 
 .btn-reset:hover {
-  color: #333;
-  border-color: #999;
   background: #f0f0f0;
+}
+
+.btn-reset:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 #333;
 }
 
 @media (max-width: 768px) {
   body {
     padding: 1.5rem 1rem;
+  }
+
+  h1 {
+    font-size: 0.875rem;
+  }
+
+  .subheadline {
+    font-size: 16px;
+    max-width: 320px;
   }
 
   .header-media-wrap .header-image-placeholder {
@@ -199,17 +249,17 @@ button:active {
   .player {
     min-width: 0;
     flex: 1;
-    padding: 0.6rem 0.4rem;
-    border-radius: 10px;
+    padding: 0.75rem 0.5rem;
+    border-radius: 0;
   }
 
   .player h2 {
-    font-size: 16px;
+    font-size: 8px;
     margin: 0 0 24px;
   }
 
   .score {
-    font-size: 40px;
+    font-size: 1.25rem;
     margin: 0 0 24px;
   }
 
@@ -222,7 +272,11 @@ button:active {
     flex: 1;
     min-width: 0;
     padding: 0.5rem 0.25rem;
-    font-size: 18px;
+    font-size: 14px;
+  }
+
+  .btn-reset {
+    font-size: 8px;
   }
 
 }
