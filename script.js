@@ -47,6 +47,7 @@ const resetWrapEl = document.getElementById('reset-wrap');
 const countdownOverlayEl = document.getElementById('countdown-overlay');
 const gameSlotPreEl = document.getElementById('game-slot-pre');
 const gameSlotPlayEl = document.getElementById('game-slot-play');
+const topBarSlotEl = document.getElementById('top-bar-slot');
 const headlineEl = document.getElementById('headline');
 const subheadlineEl = document.getElementById('subheadline');
 const plus1Btn = document.getElementById('plus1');
@@ -88,6 +89,8 @@ function displayScores() {
   scoreBEl.textContent = scoreB;
   saveScores();
   if (!gameStarted) {
+    document.body.classList.add('center-pre-game');
+    document.body.classList.remove('end-screen');
     if (gameSlotPreEl) gameSlotPreEl.hidden = false;
     if (gameSlotPlayEl) gameSlotPlayEl.hidden = true;
     scoreBoardEl.hidden = true;
@@ -139,12 +142,16 @@ function displayScores() {
     }
     const isAllDone = headerPhase === 6;
     const duringCountdown = headerPhase === -1;
+    document.body.classList.toggle('center-pre-game', duringCountdown);
+    document.body.classList.toggle('end-screen', isAllDone);
     if (gameSlotPreEl) gameSlotPreEl.hidden = !duringCountdown;
     if (gameSlotPlayEl) gameSlotPlayEl.hidden = duringCountdown;
     /* Show success only when cats === 3 and dogs === 3; otherwise show failure (mad cat + message) */
     const succeeded = isAllDone && scoreA === 3 && scoreB === 3;
-    if (headlineEl) headlineEl.hidden = isAllDone;
-    if (subheadlineEl) subheadlineEl.hidden = isAllDone;
+    const inPlay = headerPhase >= 0 && headerPhase <= 5;
+    if (headlineEl) headlineEl.hidden = isAllDone || inPlay;
+    if (subheadlineEl) subheadlineEl.hidden = isAllDone || inPlay;
+    if (topBarSlotEl) topBarSlotEl.hidden = !inPlay;
     const hideScoreBoard = isAllDone || duringCountdown;
     scoreBoardEl.hidden = hideScoreBoard;
     if (hideScoreBoard && duringCountdown) scoreBoardEl.classList.add('reserve-space');
@@ -364,6 +371,7 @@ function showPreGameUI() {
   resetWrapEl.hidden = true;
   allDoneMessageEl.hidden = true;
   failureMessageEl.hidden = true;
+  document.body.classList.remove('end-screen');
 }
 
 function runStartCountdown(callback) {

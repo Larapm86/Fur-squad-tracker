@@ -15,6 +15,15 @@ body {
   padding: 2rem 1.5rem 3rem;
 }
 
+/* Start screen and 3-2-1 countdown: center block so headlines start from same point */
+body.center-pre-game {
+  justify-content: center;
+}
+
+body.end-screen {
+  justify-content: center;
+}
+
 /* Single fixed-size container: Start OR countdown OR game (image + bar) */
 .game-slot {
   margin: 0 0 1.5rem;
