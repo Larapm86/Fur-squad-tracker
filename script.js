@@ -70,6 +70,16 @@ const GUESS_HOLD_MS = 1500;
 const CAT_GUESS_MESSAGES = ['Purrfect!', 'Meow-velous!', 'Kitty-approved!'];
 const DOG_GUESS_MESSAGES = ['Woof-tastic!', 'Bark yeah!', 'Paw-some!'];
 
+function moveProgressBarToTop() {
+  if (topBarSlotEl && headerCountdownEl) topBarSlotEl.appendChild(headerCountdownEl);
+  if (topBarSlotEl && guessSuccessEl) topBarSlotEl.appendChild(guessSuccessEl);
+}
+
+function moveProgressBarToGameSlot() {
+  if (gameSlotPlayEl && headerCountdownEl) gameSlotPlayEl.appendChild(headerCountdownEl);
+  if (gameSlotPlayEl && guessSuccessEl) gameSlotPlayEl.appendChild(guessSuccessEl);
+}
+
 function setCountersActiveState() {
   if (headerPhase < 0 || headerPhase > 5) {
     if (plus1Btn) plus1Btn.disabled = false;
@@ -243,6 +253,7 @@ function doAdvanceToNextPhase() {
     runCountdown();
   } else {
     headerPhase = 6;
+    moveProgressBarToGameSlot();
     headerImageEls.forEach(el => { el.hidden = true; });
     const succeeded = scoreA === 3 && scoreB === 3;
     headerPlantEl.hidden = !succeeded;
@@ -351,6 +362,7 @@ function resetScores() {
 }
 
 function showPreGameUI() {
+  moveProgressBarToGameSlot();
   headerImageEls.forEach(el => { el.hidden = true; });
   headerPlantEl.hidden = true;
   headerCatnapEl.hidden = true;
@@ -361,6 +373,7 @@ function showPreGameUI() {
   guessSuccessEl.hidden = true;
   countdownOverlayEl.hidden = true;
   countdownOverlayEl.textContent = '';
+  if (topBarSlotEl) topBarSlotEl.hidden = true;
   if (gameSlotPreEl) gameSlotPreEl.hidden = false;
   if (gameSlotPlayEl) gameSlotPlayEl.hidden = true;
   if (headlineEl) headlineEl.hidden = false;
@@ -408,6 +421,8 @@ function startGame() {
     phaseDogDelta = 0;
     if (gameSlotPreEl) gameSlotPreEl.hidden = true;
     if (gameSlotPlayEl) gameSlotPlayEl.hidden = false;
+    moveProgressBarToTop();
+    if (topBarSlotEl) topBarSlotEl.hidden = false;
     headerImageEls.forEach(el => { el.hidden = true; });
     headerCatEl.hidden = false;
     headerCountdownEl.hidden = false;

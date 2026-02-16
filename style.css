@@ -24,6 +24,21 @@ body.end-screen {
   justify-content: center;
 }
 
+.top-bar-slot {
+  width: 15vw;
+  min-width: 15vw;
+  max-width: 15vw;
+  margin: 0 0 1.5rem;
+}
+
+.top-bar-slot[hidden] {
+  display: none;
+}
+
+.top-bar-slot .header-countdown {
+  margin-top: 0;
+}
+
 /* Single fixed-size container: Start OR countdown OR game (image + bar) */
 .game-slot {
   margin: 0 0 1.5rem;
@@ -432,6 +447,12 @@ button:disabled {
   .subheadline {
     font-size: 0.875rem;
     max-width: 320px;
+  }
+
+  .top-bar-slot {
+    width: 44vw;
+    min-width: 44vw;
+    max-width: 44vw;
   }
 
   .game-slot {
