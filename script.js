@@ -49,10 +49,16 @@ const gameSlotPreEl = document.getElementById('game-slot-pre');
 const gameSlotPlayEl = document.getElementById('game-slot-play');
 const headlineEl = document.getElementById('headline');
 const subheadlineEl = document.getElementById('subheadline');
+const plus1Btn = document.getElementById('plus1');
+const minus1Btn = document.getElementById('minus1');
+const plus2Btn = document.getElementById('plus2');
+const minus2Btn = document.getElementById('minus2');
 
 const headerImageEls = [headerCatEl, headerDogEl, headerDog2El, headerCuteCatEl, headerAnnoyingDogEl, headerBlackCatEl];
 let gameStarted = false;
-let headerPhase = -1; /* -1 = pre-game (3-2-1 countdown), 0-5 = phases, 6 = all done */
+let headerPhase = -1;
+let phaseCatDelta = 0;  /* net +1 cat taps this phase */
+let phaseDogDelta = 0;  /* net +1 dog taps this phase */ /* -1 = pre-game (3-2-1 countdown), 0-5 = phases, 6 = all done */
 let allPhasesCorrectGuess = true; /* false if any phase was advanced by timeout */
 let countdownCancelled = false;
 let countdownRafId = null;
@@ -62,6 +68,20 @@ const COUNTDOWN_DURATION_MS = 5000;
 const GUESS_HOLD_MS = 1500;
 const CAT_GUESS_MESSAGES = ['Purrfect!', 'Meow-velous!', 'Kitty-approved!'];
 const DOG_GUESS_MESSAGES = ['Woof-tastic!', 'Bark yeah!', 'Paw-some!'];
+
+function setCountersActiveState() {
+  if (headerPhase < 0 || headerPhase > 5) {
+    if (plus1Btn) plus1Btn.disabled = false;
+    if (minus1Btn) minus1Btn.disabled = false;
+    if (plus2Btn) plus2Btn.disabled = false;
+    if (minus2Btn) minus2Btn.disabled = false;
+    return;
+  }
+  if (plus1Btn) plus1Btn.disabled = phaseCatDelta > 0;
+  if (minus1Btn) minus1Btn.disabled = phaseCatDelta > 0;
+  if (plus2Btn) plus2Btn.disabled = phaseDogDelta > 0;
+  if (minus2Btn) minus2Btn.disabled = phaseDogDelta > 0;
+}
 
 function displayScores() {
   scoreAEl.textContent = scoreA;
@@ -176,28 +196,43 @@ function doAdvanceToNextPhase() {
   headerImageEls.forEach(el => { el.hidden = true; });
   if (headerPhase === 0) {
     headerPhase = 1;
+    phaseCatDelta = 0;
+    phaseDogDelta = 0;
     headerDogEl.hidden = false;
     headerCountdownEl.hidden = true;
+    setCountersActiveState();
     runCountdown();
   } else if (headerPhase === 1) {
     headerPhase = 2;
+    phaseCatDelta = 0;
+    phaseDogDelta = 0;
     headerDog2El.hidden = false;
     headerCountdownEl.hidden = true;
+    setCountersActiveState();
     runCountdown();
   } else if (headerPhase === 2) {
     headerPhase = 3;
+    phaseCatDelta = 0;
+    phaseDogDelta = 0;
     headerCuteCatEl.hidden = false;
     headerCountdownEl.hidden = true;
+    setCountersActiveState();
     runCountdown();
   } else if (headerPhase === 3) {
     headerPhase = 4;
+    phaseCatDelta = 0;
+    phaseDogDelta = 0;
     headerAnnoyingDogEl.hidden = false;
     headerCountdownEl.hidden = true;
+    setCountersActiveState();
     runCountdown();
   } else if (headerPhase === 4) {
     headerPhase = 5;
+    phaseCatDelta = 0;
+    phaseDogDelta = 0;
     headerBlackCatEl.hidden = false;
     headerCountdownEl.hidden = true;
+    setCountersActiveState();
     runCountdown();
   } else {
     headerPhase = 6;
@@ -247,6 +282,8 @@ function startCountdown() {
 
 function incrementTeamA() {
   scoreA++;
+  phaseDogDelta++;
+  setCountersActiveState();
   if (headerPhase === 1 || headerPhase === 2 || headerPhase === 4) advanceToNextPhase(true);
   displayScores();
 }
@@ -254,12 +291,16 @@ function incrementTeamA() {
 function decrementTeamA() {
   if (scoreA > 0) {
     scoreA--;
+    phaseDogDelta = Math.max(0, phaseDogDelta - 1);
+    setCountersActiveState();
     displayScores();
   }
 }
 
 function incrementTeamB() {
   scoreB++;
+  phaseCatDelta++;
+  setCountersActiveState();
   if (headerPhase === 0 || headerPhase === 3 || headerPhase === 5) advanceToNextPhase(true);
   displayScores();
 }
@@ -267,6 +308,8 @@ function incrementTeamB() {
 function decrementTeamB() {
   if (scoreB > 0) {
     scoreB--;
+    phaseCatDelta = Math.max(0, phaseCatDelta - 1);
+    setCountersActiveState();
     displayScores();
   }
 }
@@ -289,6 +332,8 @@ function resetScores() {
   }
   gameStarted = false;
   headerPhase = -1;
+  phaseCatDelta = 0;
+  phaseDogDelta = 0;
   bravoWrapEl.hidden = true;
   headerVideoEl.hidden = true;
   headerVideoEl.pause();
@@ -351,6 +396,8 @@ function startGame() {
   runStartCountdown(() => {
     allPhasesCorrectGuess = true;
     headerPhase = 0;
+    phaseCatDelta = 0;
+    phaseDogDelta = 0;
     if (gameSlotPreEl) gameSlotPreEl.hidden = true;
     if (gameSlotPlayEl) gameSlotPlayEl.hidden = false;
     headerImageEls.forEach(el => { el.hidden = true; });
@@ -358,6 +405,7 @@ function startGame() {
     headerCountdownEl.hidden = false;
     headerCountdownFillEl.style.width = '0%';
     headerCountdownEl.setAttribute('aria-valuenow', 0);
+    setCountersActiveState();
     scoreBoardEl.classList.remove('reserve-space');
     scoreBoardEl.hidden = false;
     startCountdown();

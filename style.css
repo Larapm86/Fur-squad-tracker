@@ -232,6 +232,12 @@ button:active {
   transform: translateY(2px);
 }
 
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 .btn-add {
   background: #e94560;
   color: #fff;
