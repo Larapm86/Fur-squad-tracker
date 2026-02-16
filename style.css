@@ -57,18 +57,22 @@ body.end-screen {
   contain: layout;
 }
 
+/* Same layout as end screen: content from top, centered */
 .game-slot-pre {
   position: absolute;
   inset: 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   pointer-events: none;
 }
 
 .game-slot-pre .start-wrap {
   pointer-events: auto;
+  flex-shrink: 0;
   margin: 0;
+  padding-top: 0;
   min-height: 0;
 }
 
@@ -99,13 +103,18 @@ body.end-screen .game-slot-play {
   align-items: center;
 }
 
+/* Message stays above the gif and never collapses into it */
 body.end-screen .game-slot-play .end-screen-message {
   order: 1;
-  margin-bottom: 0.75rem;
+  flex-shrink: 0;
+  margin: 0 0 0.75rem;
+  padding: 0;
+  min-height: 2.5em;
 }
 
 body.end-screen .game-slot-play .header-image-slot {
   order: 2;
+  flex-shrink: 0;
   overflow: visible;
 }
 
@@ -387,6 +396,7 @@ button:disabled {
 
 /* End-screen messages sit above the image (success = plant, failure = cat-mad) */
 .end-screen-message {
+  display: block;
   font-family: 'Press Start 2P', cursive;
   font-size: 0.75rem;
   text-align: center;
