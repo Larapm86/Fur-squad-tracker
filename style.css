@@ -15,9 +15,15 @@ body {
   padding: 2rem 1.5rem 3rem;
 }
 
-/* Start screen and 3-2-1 countdown: center block so headlines start from same point */
+/* Start screen and 3-2-1 countdown: center block in the middle of the screen */
 body.center-pre-game {
   justify-content: center;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+body.center-pre-game .game-slot {
+  margin: auto 0;
 }
 
 body.end-screen {
@@ -39,14 +45,16 @@ body.end-screen {
   margin-top: 0;
 }
 
-/* Single fixed-size container: Start OR countdown OR game (image + bar) */
+/* Fixed-size container so height never changes when success overlay shows */
 .game-slot {
   margin: 0 0 1.5rem;
   position: relative;
   width: 15vw;
   min-width: 15vw;
   max-width: 15vw;
-  min-height: calc(15vw + 32px); /* image aspect 1 + bar */
+  height: calc(15vw + 32px);
+  min-height: calc(15vw + 32px);
+  contain: layout;
 }
 
 .game-slot-pre {
@@ -75,12 +83,36 @@ body.end-screen {
 .game-slot-play {
   position: relative;
   width: 100%;
+  height: 100%;
+  min-height: calc(15vw + 32px);
 }
 
 .game-slot-play[hidden] {
   display: none;
 }
 
+/* Last screen: center the message + gif in the middle of the slot */
+body.end-screen .game-slot-play {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+body.end-screen .game-slot-play .end-screen-message {
+  order: 1;
+  margin-bottom: 0.75rem;
+}
+
+body.end-screen .game-slot-play .header-image-slot {
+  order: 2;
+}
+
+body.end-screen .game-slot-play .header-countdown-wrap {
+  order: 3;
+}
+
+/* 3, 2, 1 countdown centered in the middle of the slot */
 .countdown-overlay {
   position: absolute;
   inset: 0;
@@ -89,7 +121,7 @@ body.end-screen {
   justify-content: center;
   background: transparent;
   font-family: 'Press Start 2P', cursive;
-  font-size: 2.5rem;
+  font-size: 3rem;
   color: #333;
   pointer-events: none;
 }
@@ -173,8 +205,10 @@ body.end-screen {
   box-shadow: inset 2px 0 0 rgba(255, 255, 255, 0.2);
 }
 
+/* Hide bar visually but keep its space so counters below don't jump */
 .header-countdown[hidden] {
-  display: none;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .header-countdown[hidden] .header-countdown-fill {
@@ -223,7 +257,8 @@ h1 {
   flex-wrap: wrap;
   justify-content: center;
   max-width: 560px;
-  min-height: 200px;  /* stable height so counters don't jump when success overlay shows */
+  min-height: 200px;
+  contain: layout;
 }
 
 /* Pixel style counter */
@@ -248,6 +283,7 @@ h1 {
   line-height: 1.6;
 }
 
+/* Fixed width so digit changes (0→1→2→3) don't shift the counter layout */
 .score {
   font-family: 'Press Start 2P', cursive;
   font-size: 2.5rem;
@@ -255,6 +291,11 @@ h1 {
   margin: 0 0 1rem;
   color: #222;
   line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+  width: 2ch;
+  min-width: 2ch;
+  display: inline-block;
+  text-align: center;
 }
 
 .controls {
@@ -286,12 +327,12 @@ button:disabled {
 }
 
 .btn-add {
-  background: #2d7a6e;
+  background: #e94560;
   color: #fff;
 }
 
 .btn-add:hover {
-  background: #3a8f82;
+  background: #ff6b6b;
 }
 
 .btn-add:active {
@@ -300,15 +341,15 @@ button:disabled {
 }
 
 .btn-subtract {
-  background: #5a5a5a;
-  color: #fff;
+  background: #c0c0c0;
+  color: #000;
   border: 3px solid #333;
   -webkit-text-stroke: 1px currentColor;
   paint-order: stroke fill;
 }
 
 .btn-subtract:hover {
-  background: #6b6b6b;
+  background: #d0d0d0;
 }
 
 .btn-subtract:focus {
@@ -478,6 +519,11 @@ button:disabled {
     width: 44vw;
     min-width: 44vw;
     max-width: 44vw;
+    height: calc(44vw + 32px);
+    min-height: calc(44vw + 32px);
+  }
+
+  .game-slot-play {
     min-height: calc(44vw + 32px);
   }
 
@@ -503,6 +549,8 @@ button:disabled {
   .score {
     font-size: 1.75rem;
     margin: 0 0 24px;
+    width: 2ch;
+    min-width: 2ch;
   }
 
   .controls {

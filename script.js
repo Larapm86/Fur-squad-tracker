@@ -87,10 +87,13 @@ function setCountersActiveState() {
     if (minus2Btn) minus2Btn.disabled = false;
     return;
   }
-  if (plus1Btn) plus1Btn.disabled = phaseCatDelta > 0;
-  if (minus1Btn) minus1Btn.disabled = phaseCatDelta > 0;
-  if (plus2Btn) plus2Btn.disabled = phaseDogDelta > 0;
-  if (minus2Btn) minus2Btn.disabled = phaseDogDelta > 0;
+  /* Start: all buttons active. After +1 on one team: that plus off, that minus on, other team’s buttons off. Undo (minus) restores all active. */
+  const catLock = phaseCatDelta > 0;
+  const dogLock = phaseDogDelta > 0;
+  if (plus1Btn) plus1Btn.disabled = dogLock || catLock;
+  if (minus1Btn) minus1Btn.disabled = phaseDogDelta === 0 || catLock;
+  if (plus2Btn) plus2Btn.disabled = catLock || dogLock;
+  if (minus2Btn) minus2Btn.disabled = phaseCatDelta === 0 || dogLock;
 }
 
 function displayScores() {
@@ -184,6 +187,11 @@ function showGuessSuccessAndHold() {
     cancelAnimationFrame(countdownRafId);
     countdownRafId = null;
   }
+  /* Disable counters during hold so one tap = one animal; no double-tap */
+  if (plus1Btn) plus1Btn.disabled = true;
+  if (minus1Btn) minus1Btn.disabled = true;
+  if (plus2Btn) plus2Btn.disabled = true;
+  if (minus2Btn) minus2Btn.disabled = true;
   headerCountdownEl.hidden = true;
   const isCat = headerPhase === 0 || headerPhase === 3 || headerPhase === 5;
   const messages = isCat ? CAT_GUESS_MESSAGES : DOG_GUESS_MESSAGES;
