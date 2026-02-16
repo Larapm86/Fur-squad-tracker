@@ -276,6 +276,13 @@ button:active {
   display: none;
 }
 
+/* Reserve space during 3-2-1 countdown to prevent layout jump when game starts */
+#score-board[hidden].reserve-space {
+  display: flex;
+  visibility: hidden;
+  pointer-events: none;
+}
+
 .bravo-wrap {
   margin: 0 0 1.5rem;
   min-height: 2.5rem;
@@ -319,7 +326,10 @@ button:active {
 }
 
 .start-wrap[hidden] {
-  display: none;
+  visibility: hidden;
+  display: block;
+  min-height: 3.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .btn-start {

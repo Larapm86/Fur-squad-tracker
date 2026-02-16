@@ -117,7 +117,10 @@ function displayScores() {
     const succeeded = isAllDone && scoreA === 3 && scoreB === 3;
     if (headlineEl) headlineEl.hidden = isAllDone;
     if (subheadlineEl) subheadlineEl.hidden = isAllDone;
-    scoreBoardEl.hidden = isAllDone || duringCountdown;
+    const hideScoreBoard = isAllDone || duringCountdown;
+    scoreBoardEl.hidden = hideScoreBoard;
+    if (hideScoreBoard && duringCountdown) scoreBoardEl.classList.add('reserve-space');
+    else scoreBoardEl.classList.remove('reserve-space');
     resetWrapEl.hidden = !isAllDone;
     allDoneMessageEl.hidden = !succeeded;
     if (isAllDone && !succeeded) {
@@ -302,6 +305,7 @@ function showPreGameUI() {
   if (subheadlineEl) subheadlineEl.hidden = false;
   startWrapEl.hidden = false;
   scoreBoardEl.hidden = true;
+  scoreBoardEl.classList.remove('reserve-space');
   resetWrapEl.hidden = true;
   allDoneMessageEl.hidden = true;
   failureMessageEl.hidden = true;
@@ -342,7 +346,8 @@ function startGame() {
     headerCountdownEl.hidden = false;
     headerCountdownFillEl.style.width = '0%';
     headerCountdownEl.setAttribute('aria-valuenow', 0);
-    scoreBoardEl.hidden = false;  /* show counters when game starts */
+    scoreBoardEl.classList.remove('reserve-space');
+    scoreBoardEl.hidden = false;
     startCountdown();
     displayScores();
   });
