@@ -56,11 +56,27 @@ const plus2Btn = document.getElementById('plus2');
 const minus2Btn = document.getElementById('minus2');
 
 const headerImageEls = [headerCatEl, headerDogEl, headerDog2El, headerCuteCatEl, headerAnnoyingDogEl, headerBlackCatEl];
+const PHASE_INDICES = [0, 1, 2, 3, 4, 5];
 let gameStarted = false;
 let headerPhase = -1;
+let phaseOrder = PHASE_INDICES.slice(); /* randomized order each game */
+let phaseIndex = 0;
 let phaseCatDelta = 0;  /* net +1 cat taps this phase */
 let phaseDogDelta = 0;  /* net +1 dog taps this phase */ /* -1 = pre-game (3-2-1 countdown), 0-5 = phases, 6 = all done */
 let allPhasesCorrectGuess = true; /* false if any phase was advanced by timeout */
+
+function shuffleArray(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function showImageForPhase(phase) {
+  headerImageEls.forEach((el, i) => { el.hidden = i !== phase; });
+}
 let countdownCancelled = false;
 let countdownRafId = null;
 let guessSuccessTimeoutId = null;
@@ -218,50 +234,10 @@ function doAdvanceToNextPhase() {
   headerCountdownFillEl.style.width = '100%';
   headerCountdownEl.setAttribute('aria-valuenow', 100);
   headerImageEls.forEach(el => { el.hidden = true; });
-  if (headerPhase === 0) {
-    headerPhase = 1;
-    phaseCatDelta = 0;
-    phaseDogDelta = 0;
-    headerDogEl.hidden = false;
-    headerCountdownEl.hidden = true;
-    setCountersActiveState();
-    runCountdown();
-  } else if (headerPhase === 1) {
-    headerPhase = 2;
-    phaseCatDelta = 0;
-    phaseDogDelta = 0;
-    headerDog2El.hidden = false;
-    headerCountdownEl.hidden = true;
-    setCountersActiveState();
-    runCountdown();
-  } else if (headerPhase === 2) {
-    headerPhase = 3;
-    phaseCatDelta = 0;
-    phaseDogDelta = 0;
-    headerCuteCatEl.hidden = false;
-    headerCountdownEl.hidden = true;
-    setCountersActiveState();
-    runCountdown();
-  } else if (headerPhase === 3) {
-    headerPhase = 4;
-    phaseCatDelta = 0;
-    phaseDogDelta = 0;
-    headerAnnoyingDogEl.hidden = false;
-    headerCountdownEl.hidden = true;
-    setCountersActiveState();
-    runCountdown();
-  } else if (headerPhase === 4) {
-    headerPhase = 5;
-    phaseCatDelta = 0;
-    phaseDogDelta = 0;
-    headerBlackCatEl.hidden = false;
-    headerCountdownEl.hidden = true;
-    setCountersActiveState();
-    runCountdown();
-  } else {
+  phaseIndex += 1;
+  if (phaseIndex >= 6) {
     headerPhase = 6;
     moveProgressBarToGameSlot();
-    headerImageEls.forEach(el => { el.hidden = true; });
     const succeeded = scoreA === 3 && scoreB === 3;
     headerPlantEl.hidden = !succeeded;
     headerCatnapEl.hidden = true;
@@ -271,6 +247,14 @@ function doAdvanceToNextPhase() {
     }
     headerCountdownEl.hidden = true;
     displayScores();
+  } else {
+    headerPhase = phaseOrder[phaseIndex];
+    phaseCatDelta = 0;
+    phaseDogDelta = 0;
+    showImageForPhase(headerPhase);
+    headerCountdownEl.hidden = true;
+    setCountersActiveState();
+    runCountdown();
   }
 }
 
@@ -424,13 +408,14 @@ function startGame() {
   displayScores();
   runStartCountdown(() => {
     allPhasesCorrectGuess = true;
-    headerPhase = 0;
+    phaseOrder = shuffleArray(PHASE_INDICES);
+    phaseIndex = 0;
+    headerPhase = phaseOrder[0];
     phaseCatDelta = 0;
     phaseDogDelta = 0;
     if (gameSlotPreEl) gameSlotPreEl.hidden = true;
     if (gameSlotPlayEl) gameSlotPlayEl.hidden = false;
-    headerImageEls.forEach(el => { el.hidden = true; });
-    headerCatEl.hidden = false;
+    showImageForPhase(headerPhase);
     headerCountdownEl.hidden = false;
     headerCountdownFillEl.style.width = '0%';
     headerCountdownEl.setAttribute('aria-valuenow', 0);

@@ -91,11 +91,11 @@ body.end-screen {
   display: none;
 }
 
-/* Last screen: center the message + gif in the middle of the slot */
+/* Last screen: layout starts from top like previous screens */
 body.end-screen .game-slot-play {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 }
 
@@ -106,6 +106,13 @@ body.end-screen .game-slot-play .end-screen-message {
 
 body.end-screen .game-slot-play .header-image-slot {
   order: 2;
+  overflow: visible;
+}
+
+/* Success and failure images 20% bigger on end screen */
+body.end-screen .header-image-slot .header-image-placeholder:not([hidden]) {
+  transform: scale(1.2);
+  transform-origin: center center;
 }
 
 body.end-screen .game-slot-play .header-countdown-wrap {
