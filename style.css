@@ -104,21 +104,7 @@ body.end-screen .game-slot-play {
   overflow: visible;
 }
 
-/* Message stays above the gif, one line, never truncated or clipped */
-body.end-screen .game-slot-play .end-screen-message {
-  order: 1;
-  flex-shrink: 0;
-  margin: 0 0 0.75rem;
-  padding: 0 0.25rem;
-  min-height: 2em;
-  white-space: nowrap;
-  overflow: visible;
-  width: max-content;
-  max-width: 100%;
-}
-
 body.end-screen .game-slot-play .header-image-slot {
-  order: 2;
   flex-shrink: 0;
   overflow: visible;
 }
@@ -130,7 +116,7 @@ body.end-screen .header-image-slot .header-image-placeholder:not([hidden]) {
 }
 
 body.end-screen .game-slot-play .header-countdown-wrap {
-  order: 3;
+  order: 2;
 }
 
 body.end-screen .game-slot {
@@ -277,6 +263,18 @@ h1 {
   line-height: 1.8;
 }
 
+/* End-screen success/failure in same position and style as start-screen subheadline */
+.subheadline-end {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #666;
+  margin: 0 0 2.5rem;
+  text-align: center;
+  max-width: 360px;
+  line-height: 1.8;
+}
+
 .score-board {
   display: flex;
   gap: 2rem;
@@ -402,22 +400,6 @@ button:disabled {
 
 .guess-success-message[hidden] {
   display: none;
-}
-
-/* End-screen messages: one line, never wrap or clip */
-.end-screen-message {
-  display: block;
-  font-family: 'Press Start 2P', cursive;
-  font-size: 0.5rem;
-  text-align: center;
-  color: #333;
-  line-height: 1.4;
-  margin: 0 0 0.75rem;
-  padding: 0 0.25rem;
-  white-space: nowrap;
-  overflow: visible;
-  width: max-content;
-  max-width: 100%;
 }
 
 .all-done-message[hidden],

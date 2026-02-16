@@ -177,7 +177,7 @@ function displayScores() {
     /* Show success only when cats === 3 and dogs === 3; otherwise show failure (mad cat + message) */
     const succeeded = isAllDone && scoreA === 3 && scoreB === 3;
     const inPlay = headerPhase >= 0 && headerPhase <= 5;
-    if (headlineEl) headlineEl.hidden = isAllDone || inPlay || duringCountdown;
+    if (headlineEl) headlineEl.hidden = inPlay || duringCountdown;
     if (subheadlineEl) subheadlineEl.hidden = isAllDone || inPlay || duringCountdown;
     if (topBarSlotEl) topBarSlotEl.hidden = !inPlay;
     const hideScoreBoard = isAllDone || duringCountdown;
