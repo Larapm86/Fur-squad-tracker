@@ -17,20 +17,85 @@ body {
 
 .header-media-wrap {
   margin: 0 0 1.5rem;
-}
-
-.header-media-wrap .header-image-placeholder {
-  display: block;
+  position: relative;
   width: 15vw;
   min-width: 15vw;
   max-width: 15vw;
-  height: auto;
+}
+
+.header-image-slot {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.header-media-wrap .header-image-placeholder {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
   border-radius: 12px;
   margin: 0;
 }
 
 .header-media-wrap .header-image-placeholder[hidden] {
   display: none;
+}
+
+.header-media-wrap #header-annoying-dog {
+  transform: scale(0.8);
+  transform-origin: center center;
+}
+
+.countdown-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 3rem;
+  color: #333;
+  pointer-events: none;
+}
+
+.countdown-overlay[hidden] {
+  display: none;
+}
+
+.header-countdown {
+  width: 100%;
+  height: 20px;
+  margin: 12px 0 0;
+  background: #e8e8e8;
+  border: 3px solid #333;
+  border-radius: 0;
+  overflow: hidden;
+  box-shadow: 4px 4px 0 #333;
+  pointer-events: none;
+}
+
+.header-countdown-fill {
+  height: 100%;
+  width: 0%;
+  background: #e94560;
+  border-radius: 0;
+  transition: none;
+  box-shadow: inset 2px 0 0 rgba(255, 255, 255, 0.2);
+}
+
+.header-countdown[hidden] {
+  display: none;
+}
+
+.header-countdown[hidden] .header-countdown-fill {
+  width: 0%;
 }
 
 .header-video {
@@ -60,7 +125,7 @@ h1 {
 
 .subheadline {
   font-family: 'Press Start 2P', cursive;
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 400;
   color: #666;
   margin: 0 0 2.5rem;
@@ -158,6 +223,54 @@ button:active {
   box-shadow: 1px 1px 0 #333;
 }
 
+/* Replaces progress bar in same slot when visible */
+.guess-success-message {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.85rem;
+  text-align: center;
+  margin: 12px 0 0;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+  line-height: 1;
+}
+
+.guess-success-message[hidden] {
+  display: none;
+}
+
+.all-done-message {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.85rem;
+  text-align: center;
+  margin: 0 0 1.5rem;
+  color: #333;
+  line-height: 1.6;
+}
+
+.all-done-message[hidden] {
+  display: none;
+}
+
+.failure-message {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.85rem;
+  text-align: center;
+  margin: 0 0 1.5rem;
+  color: #333;
+  line-height: 1.6;
+}
+
+.failure-message[hidden] {
+  display: none;
+}
+
+#score-board[hidden] {
+  display: none;
+}
+
 .bravo-wrap {
   margin: 0 0 1.5rem;
   min-height: 2.5rem;
@@ -195,8 +308,41 @@ button:active {
   line-height: 1.6;
 }
 
+.start-wrap {
+  margin: 0 0 1.5rem;
+  text-align: center;
+}
+
+.start-wrap[hidden] {
+  display: none;
+}
+
+.btn-start {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 14px;
+  background: #e94560;
+  color: #fff;
+  border: 3px solid #333;
+  border-radius: 0;
+  padding: 0.75rem 1.5rem;
+  box-shadow: 4px 4px 0 #333;
+}
+
+.btn-start:hover {
+  background: #f06078;
+}
+
+.btn-start:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #333;
+}
+
 .reset-wrap {
   margin-top: 2.5rem;
+}
+
+.reset-wrap[hidden] {
+  display: none;
 }
 
 .btn-reset {
@@ -229,11 +375,11 @@ button:active {
   }
 
   .subheadline {
-    font-size: 16px;
+    font-size: 12px;
     max-width: 320px;
   }
 
-  .header-media-wrap .header-image-placeholder {
+  .header-media-wrap {
     width: 44vw;
     min-width: 44vw;
     max-width: 44vw;

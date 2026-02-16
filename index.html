@@ -11,18 +11,38 @@
 </head>
 <body>
   <h1>Fur Squad Tracker</h1>
-  <p class="subheadline">Every tap = one more furry friend spotted!<br>Think you can catch them all?</p>
+  <p class="subheadline" id="subheadline">Every tap = one more furry friend spotted!<br>Think you can catch them all?</p>
+  <div class="start-wrap" id="start-wrap">
+    <button type="button" class="btn-start" id="start">Start</button>
+  </div>
   <div class="header-media-wrap">
-    <img src="https://i.pinimg.com/1200x/cd/dd/82/cddd82848db93035b55cd85312e11cfe.jpg" alt="Score Keeper" class="header-image-placeholder" id="header-image">
-    <video class="header-image-placeholder header-video" id="header-video" muted loop playsinline aria-hidden="true" hidden>
-      <source src="assets/bravo-animation.mp4" type="video/mp4">
-    </video>
+    <div class="countdown-overlay" id="countdown-overlay" aria-live="polite" hidden></div>
+    <div class="header-image-slot">
+      <img src="assets/cat.png" alt="Pixel art cat" class="header-image-placeholder" id="header-cat">
+      <img src="assets/dog.png" alt="Pixel art dog" class="header-image-placeholder" id="header-dog" hidden>
+      <img src="assets/dog2.png" alt="Pixel art dog" class="header-image-placeholder" id="header-dog2" hidden>
+      <img src="assets/cute-kawaii.png" alt="Cute kawaii cat" class="header-image-placeholder" id="header-cute-cat" hidden>
+      <img src="assets/annoying-dog.png" alt="Annoying dog" class="header-image-placeholder" id="header-annoying-dog" hidden>
+      <img src="assets/nyan-cat.png" alt="Nyan cat" class="header-image-placeholder" id="header-nyan-cat" hidden>
+      <img src="assets/plant.png" alt="Celebration" class="header-image-placeholder" id="header-plant" hidden>
+      <img src="assets/catnap.png" alt="Catnap" class="header-image-placeholder" id="header-catnap" hidden>
+      <img src="assets/cat-mad.png" alt="Try again" class="header-image-placeholder" id="header-cat-mad" hidden>
+      <video class="header-image-placeholder header-video" id="header-video" muted loop playsinline aria-hidden="true" hidden>
+        <source src="assets/bravo-animation.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="header-countdown" id="header-countdown" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Countdown">
+      <div class="header-countdown-fill" id="header-countdown-fill"></div>
+    </div>
+    <p class="guess-success-message" id="guess-success-message" aria-live="polite" hidden></p>
   </div>
   <div class="bravo-wrap" id="bravo-wrap" hidden>
     <p class="bravo-message" id="bravo-message" aria-live="polite">Bravo!</p>
   </div>
+  <p class="all-done-message" id="all-done-message" aria-live="polite" hidden>Bloom-tastic! Now you can spin like a sunflower!</p>
+  <p class="failure-message" id="failure-message" aria-live="polite" hidden>Catnap over… try again! Time to claw at success</p>
   <img src="https://i0.wp.com/acegif.com/wp-content/gif/confetti-40.gif" alt="" class="bravo-confetti" id="bravo-confetti" aria-hidden="true" hidden>
-  <div class="score-board">
+  <div class="score-board" id="score-board" hidden>
     <section class="player" aria-labelledby="team-b-heading">
       <h2 id="team-b-heading">Cats</h2>
       <p class="score" id="score2">0</p>
@@ -40,7 +60,7 @@
       </div>
     </section>
   </div>
-  <div class="reset-wrap">
+  <div class="reset-wrap" id="reset-wrap" hidden>
     <button class="btn-reset" id="reset">Reset</button>
   </div>
 
