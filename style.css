@@ -15,12 +15,63 @@ body {
   padding: 2rem 1.5rem;
 }
 
-.header-media-wrap {
+/* Single fixed-size container: Start OR countdown OR game (image + bar) */
+.game-slot {
   margin: 0 0 1.5rem;
   position: relative;
   width: 15vw;
   min-width: 15vw;
   max-width: 15vw;
+  min-height: calc(15vw + 32px); /* image aspect 1 + bar */
+}
+
+.game-slot-pre {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.game-slot-pre .start-wrap {
+  pointer-events: auto;
+  margin: 0;
+  min-height: 0;
+}
+
+.game-slot-pre .start-wrap[hidden] {
+  display: none;
+}
+
+.game-slot-pre[hidden] {
+  display: none;
+}
+
+.game-slot-play {
+  position: relative;
+  width: 100%;
+}
+
+.game-slot-play[hidden] {
+  display: none;
+}
+
+.countdown-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 2.5rem;
+  color: #333;
+  pointer-events: none;
+}
+
+.countdown-overlay[hidden] {
+  display: none;
 }
 
 .header-image-slot {
@@ -31,7 +82,7 @@ body {
   overflow: hidden;
 }
 
-.header-media-wrap .header-image-placeholder {
+.game-slot-play .header-image-placeholder {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -41,37 +92,18 @@ body {
   margin: 0;
 }
 
-.header-media-wrap .header-image-placeholder[hidden] {
+.game-slot-play .header-image-placeholder[hidden] {
   display: none;
 }
 
-.header-media-wrap #header-annoying-dog {
+.game-slot-play #header-annoying-dog {
   transform: scale(0.8);
   transform-origin: center center;
 }
 
-.header-media-wrap #header-black-cat {
+.game-slot-play #header-black-cat {
   transform: scale(0.5);
   transform-origin: center center;
-}
-
-.countdown-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 50;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 12px;
-  font-family: 'Press Start 2P', cursive;
-  font-size: 2.5rem;   /* level 1: hero countdown */
-  color: #333;
-  pointer-events: none;
-}
-
-.countdown-overlay[hidden] {
-  display: none;
 }
 
 .header-countdown {
@@ -325,13 +357,6 @@ button:active {
   text-align: center;
 }
 
-.start-wrap[hidden] {
-  visibility: hidden;
-  display: block;
-  min-height: 3.5rem;
-  margin-bottom: 1.5rem;
-}
-
 .btn-start {
   font-family: 'Press Start 2P', cursive;
   font-size: 0.875rem;  /* level 5: primary CTA */
@@ -394,10 +419,11 @@ button:active {
     max-width: 320px;
   }
 
-  .header-media-wrap {
+  .game-slot {
     width: 44vw;
     min-width: 44vw;
     max-width: 44vw;
+    min-height: calc(44vw + 32px);
   }
 
   .score-board {

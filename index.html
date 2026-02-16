@@ -12,11 +12,14 @@
 <body>
   <h1 id="headline">Fur Squad Tracker</h1>
   <p class="subheadline" id="subheadline">Every tap = one more furry friend spotted!<br>Think you can catch them all?</p>
-  <div class="start-wrap" id="start-wrap">
-    <button type="button" class="btn-start" id="start">Start</button>
-  </div>
-  <div class="header-media-wrap">
-    <div class="countdown-overlay" id="countdown-overlay" aria-live="polite" hidden></div>
+  <div class="game-slot" id="game-slot">
+    <div class="game-slot-pre" id="game-slot-pre">
+      <div class="start-wrap" id="start-wrap">
+        <button type="button" class="btn-start" id="start">Start</button>
+      </div>
+      <div class="countdown-overlay" id="countdown-overlay" aria-live="polite" hidden></div>
+    </div>
+    <div class="game-slot-play" id="game-slot-play" hidden>
     <div class="header-image-slot">
       <img src="assets/cat.png" alt="Pixel art cat" class="header-image-placeholder" id="header-cat">
       <img src="assets/dog.png" alt="Pixel art dog" class="header-image-placeholder" id="header-dog" hidden>
@@ -35,6 +38,7 @@
       <div class="header-countdown-fill" id="header-countdown-fill"></div>
     </div>
     <p class="guess-success-message" id="guess-success-message" aria-live="polite" hidden></p>
+    </div>
   </div>
   <div class="bravo-wrap" id="bravo-wrap" hidden>
     <p class="bravo-message" id="bravo-message" aria-live="polite">Bravo!</p>

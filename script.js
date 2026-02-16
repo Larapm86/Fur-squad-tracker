@@ -45,6 +45,8 @@ const failureMessageEl = document.getElementById('failure-message');
 const startWrapEl = document.getElementById('start-wrap');
 const resetWrapEl = document.getElementById('reset-wrap');
 const countdownOverlayEl = document.getElementById('countdown-overlay');
+const gameSlotPreEl = document.getElementById('game-slot-pre');
+const gameSlotPlayEl = document.getElementById('game-slot-play');
 const headlineEl = document.getElementById('headline');
 const subheadlineEl = document.getElementById('subheadline');
 
@@ -66,6 +68,8 @@ function displayScores() {
   scoreBEl.textContent = scoreB;
   saveScores();
   if (!gameStarted) {
+    if (gameSlotPreEl) gameSlotPreEl.hidden = false;
+    if (gameSlotPlayEl) gameSlotPlayEl.hidden = true;
     scoreBoardEl.hidden = true;
     resetWrapEl.hidden = true;
     return;
@@ -73,6 +77,8 @@ function displayScores() {
   const isBravo = scoreA === 8 && scoreB === 6; /* 8 dogs, 6 cats */
   bravoWrapEl.hidden = !isBravo;
   if (isBravo) {
+    if (gameSlotPreEl) gameSlotPreEl.hidden = true;
+    if (gameSlotPlayEl) gameSlotPlayEl.hidden = false;
     headerImageEls.forEach(el => { el.hidden = true; });
     headerPlantEl.hidden = true;
     headerCatnapEl.hidden = true;
@@ -113,6 +119,8 @@ function displayScores() {
     }
     const isAllDone = headerPhase === 6;
     const duringCountdown = headerPhase === -1;
+    if (gameSlotPreEl) gameSlotPreEl.hidden = !duringCountdown;
+    if (gameSlotPlayEl) gameSlotPlayEl.hidden = duringCountdown;
     /* Show success only when cats === 3 and dogs === 3; otherwise show failure (mad cat + message) */
     const succeeded = isAllDone && scoreA === 3 && scoreB === 3;
     if (headlineEl) headlineEl.hidden = isAllDone;
@@ -301,6 +309,8 @@ function showPreGameUI() {
   guessSuccessEl.hidden = true;
   countdownOverlayEl.hidden = true;
   countdownOverlayEl.textContent = '';
+  if (gameSlotPreEl) gameSlotPreEl.hidden = false;
+  if (gameSlotPlayEl) gameSlotPlayEl.hidden = true;
   if (headlineEl) headlineEl.hidden = false;
   if (subheadlineEl) subheadlineEl.hidden = false;
   startWrapEl.hidden = false;
@@ -341,6 +351,8 @@ function startGame() {
   runStartCountdown(() => {
     allPhasesCorrectGuess = true;
     headerPhase = 0;
+    if (gameSlotPreEl) gameSlotPreEl.hidden = true;
+    if (gameSlotPlayEl) gameSlotPlayEl.hidden = false;
     headerImageEls.forEach(el => { el.hidden = true; });
     headerCatEl.hidden = false;
     headerCountdownEl.hidden = false;
