@@ -1,3 +1,108 @@
+/* ==========================================================================
+   DESIGN TOKENS — Edit visual values here. Organized for quick design tweaks.
+   ========================================================================== */
+
+:root {
+  /* ---- Base palette
+       Change these to shift the whole look. Grays, accent, and neutrals. ---- */
+  --palette-white: #fff;
+  --palette-black: #000;
+  --palette-gray-100: #e8e8e8;
+  --palette-gray-200: #d0d0d0;
+  --palette-gray-300: #c0c0c0;
+  --palette-gray-500: #666;
+  --palette-gray-800: #333;
+  --palette-gray-900: #222;
+  --palette-accent: #e94560;
+  --palette-accent-light: #ff6b6b;
+  --palette-accent-cta: #f06078;
+
+  /* ---- Semantic colors (reference base palette above)
+       Backgrounds, text, borders, progress bar, buttons, overlays. ---- */
+  --color-bg: var(--palette-white);
+  --color-text: var(--palette-gray-800);
+  --color-text-dark: var(--palette-gray-900);
+  --color-text-muted: var(--palette-gray-500);
+  --color-text-end: var(--palette-black);
+  --color-border: var(--palette-gray-800);
+  --color-accent: var(--palette-accent);
+  --color-accent-hover: var(--palette-accent-light);
+  --color-accent-cta-hover: var(--palette-accent-cta);
+  --color-progress-track: var(--palette-gray-100);
+  --color-progress-fill: var(--palette-accent);
+  --color-btn-subtract: var(--palette-gray-300);
+  --color-btn-subtract-hover: var(--palette-gray-200);
+  --color-player-bg: var(--palette-white);
+  --color-overlay: color-mix(in srgb, var(--palette-white) 85%, transparent);
+  --color-shadow-soft: color-mix(in srgb, var(--palette-black) 8%, transparent);
+  --color-highlight: color-mix(in srgb, var(--palette-white) 20%, transparent);
+
+  /* ---- Spacing
+       Padding, margins, gaps between sections and elements. ---- */
+  --space-body: 2rem 1.5rem 3rem;
+  --space-pre-game: 24px;
+  --space-pre-game-top: 88px;
+  --space-section: 1.5rem;
+  --space-section-sm: 1rem;
+  --space-gap-md: 0.75rem;
+  --space-gap-lg: 2rem;
+  --space-subheadline-bottom: 2.5rem;
+  --space-sentence-to-gif: 24px;
+  --space-sentence-sides: 1rem;
+  --space-sentence-pad: 0.5rem;
+  --space-countdown-bar: 32px;
+  --space-countdown-bar-inner: 20px;
+  --space-countdown-bar-margin: 12px;
+  --space-reset-top: 1rem;
+  --space-player-pad: 1.5rem;
+  --space-score-board-min: 200px;
+  --space-score-board-gap: 2rem;
+  --space-controls-gap: 0.75rem;
+  --space-headline-bottom: 0.75rem;
+  --space-label-bottom: 1rem;
+  --space-score-bottom: 1rem;
+  --space-bravo-min: 2.5rem;
+  --space-start-wrap-bottom: 1.5rem;
+  --space-btn-pad-y: 0.6rem;
+  --space-btn-pad-x: 1rem;
+  --space-btn-cta-pad: 0.75rem 1.5rem;
+  --radius-image: 12px;
+  --radius-none: 0;
+
+  /* ---- Typography
+       Font families, sizes, weights, line-heights, max-widths for text. ---- */
+  --font-body: 'Outfit', sans-serif;
+  --font-display: 'Press Start 2P', cursive;
+  --font-size-h1: 1.5rem;
+  --font-size-subheadline: 1rem;
+  --font-size-subheadline-end: clamp(12px, 3.5vw, 16px);
+  --font-size-label: 0.8125rem;
+  --font-size-score: 2.5rem;
+  --font-size-btn: 0.875rem;
+  --font-size-guess: 0.75rem;
+  --font-size-bravo: 1.125rem;
+  --font-size-countdown: 3rem;
+  --font-weight-normal: 400;
+  --line-height-tight: 1.5;
+  --line-height-body: 1.6;
+  --line-height-loose: 1.8;
+  --line-height-solid: 1;
+  --letter-spacing-label: 0.02em;
+  --max-width-subheadline: 360px;
+
+  /* ---- Borders & shadows
+       Border width/style, outline, box-shadow offsets. ---- */
+  --border-width: 3px;
+  --border-style: solid;
+  --outline-width: 2px;
+  --outline-offset: 2px;
+  --shadow-offset: 4px 4px 0;
+  --shadow-offset-sm: 3px 3px 0;
+  --shadow-offset-xs: 2px 2px 0;
+  --shadow-offset-xxs: 1px 1px 0;
+  --shadow-inset: inset 2px 0 0 var(--color-highlight);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -5,21 +110,21 @@
 body {
   margin: 0;
   min-height: 100vh;
-  font-family: 'Outfit', sans-serif;
-  background: #fff;
-  color: #333;
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-text);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding: 2rem 1.5rem 3rem;
+  padding: var(--space-body);
 }
 
 /* Start screen and 3-2-1 countdown: center block in the middle of the screen */
 body.center-pre-game {
   justify-content: center;
-  padding: 24px;
-  padding-top: 88px;
+  padding: var(--space-pre-game);
+  padding-top: var(--space-pre-game-top);
 }
 
 body.center-pre-game .game-slot {
@@ -34,7 +139,7 @@ body.end-screen {
   width: 15vw;
   min-width: 15vw;
   max-width: 15vw;
-  margin: 0 0 1.5rem;
+  margin: 0 0 var(--space-section);
 }
 
 .top-bar-slot[hidden] {
@@ -47,13 +152,13 @@ body.end-screen {
 
 /* Fixed-size container so height never changes when success overlay shows */
 .game-slot {
-  margin: 0 0 1.5rem;
+  margin: 0 0 var(--space-section);
   position: relative;
   width: 15vw;
   min-width: 15vw;
   max-width: 15vw;
-  height: calc(15vw + 32px);
-  min-height: calc(15vw + 32px);
+  height: calc(15vw + var(--space-countdown-bar));
+  min-height: calc(15vw + var(--space-countdown-bar));
   contain: layout;
 }
 
@@ -88,7 +193,7 @@ body.end-screen {
   position: relative;
   width: 100%;
   height: 100%;
-  min-height: calc(15vw + 32px);
+  min-height: calc(15vw + var(--space-countdown-bar));
 }
 
 .game-slot-play[hidden] {
@@ -140,7 +245,6 @@ body.end-screen .game-slot {
   contain: none;
 }
 
-/* 3, 2, 1 countdown centered in the middle of the slot */
 /* 3, 2, 1 countdown centered in the viewport */
 .countdown-overlay {
   position: fixed;
@@ -149,9 +253,9 @@ body.end-screen .game-slot {
   align-items: center;
   justify-content: center;
   background: transparent;
-  font-family: 'Press Start 2P', cursive;
-  font-size: 3rem;
-  color: #333;
+  font-family: var(--font-display);
+  font-size: var(--font-size-countdown);
+  color: var(--color-text);
   pointer-events: none;
   z-index: 5;
 }
@@ -164,7 +268,7 @@ body.end-screen .game-slot {
   position: relative;
   width: 100%;
   aspect-ratio: 1;
-  border-radius: 12px;
+  border-radius: var(--radius-image);
   overflow: hidden;
 }
 
@@ -179,8 +283,8 @@ body.end-screen .game-slot {
   margin: 0;
   height: auto;
   min-height: 0;
-  background: rgba(255, 255, 255, 0.85);
-  border-radius: 12px;
+  background: var(--color-overlay);
+  border-radius: var(--radius-image);
 }
 
 .game-slot-play .header-image-placeholder {
@@ -189,7 +293,7 @@ body.end-screen .game-slot {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  border-radius: 12px;
+  border-radius: var(--radius-image);
   margin: 0;
 }
 
@@ -209,30 +313,30 @@ body.end-screen .game-slot {
 
 /* Wrapper keeps fixed height when bar is hidden so counters below don't jump */
 .header-countdown-wrap {
-  height: 32px;  /* 20px bar + 12px margin-top */
-  min-height: 32px;
+  height: var(--space-countdown-bar);
+  min-height: var(--space-countdown-bar);
   margin: 0 0 0;
 }
 
 .header-countdown {
   width: 100%;
-  height: 20px;
-  margin: 12px 0 0;
-  background: #e8e8e8;
-  border: 3px solid #333;
-  border-radius: 0;
+  height: var(--space-countdown-bar-inner);
+  margin: var(--space-countdown-bar-margin) 0 0;
+  background: var(--color-progress-track);
+  border: var(--border-width) var(--border-style) var(--color-border);
+  border-radius: var(--radius-none);
   overflow: hidden;
-  box-shadow: 4px 4px 0 #333;
+  box-shadow: var(--shadow-offset) var(--color-border);
   pointer-events: none;
 }
 
 .header-countdown-fill {
   height: 100%;
   width: 0%;
-  background: #e94560;
-  border-radius: 0;
+  background: var(--color-progress-fill);
+  border-radius: var(--radius-none);
   transition: none;
-  box-shadow: inset 2px 0 0 rgba(255, 255, 255, 0.2);
+  box-shadow: var(--shadow-inset);
 }
 
 /* Hide bar visually but keep its space so counters below don't jump */
@@ -256,85 +360,85 @@ body.end-screen .game-slot {
 
 .header-cloud-dog {
   display: block;
-  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.08));
+  filter: drop-shadow(0 4px 12px var(--color-shadow-soft));
 }
 
 h1 {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 1.5rem;   /* level 2: main title */
-  font-weight: 400;
+  font-family: var(--font-display);
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-normal);
   letter-spacing: 0;
-  margin: 0 0 0.75rem;
-  color: #222;
-  line-height: 1.6;
+  margin: 0 0 var(--space-headline-bottom);
+  color: var(--color-text-dark);
+  line-height: var(--line-height-body);
   text-align: center;
 }
 
 .subheadline {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 1rem;    /* level 3: supporting intro */
-  font-weight: 400;
-  color: #666;
-  margin: 0 0 2.5rem;
+  font-family: var(--font-display);
+  font-size: var(--font-size-subheadline);
+  font-weight: var(--font-weight-normal);
+  color: var(--color-text-muted);
+  margin: 0 0 var(--space-subheadline-bottom);
   text-align: center;
-  max-width: 360px;
-  line-height: 1.8;
+  max-width: var(--max-width-subheadline);
+  line-height: var(--line-height-loose);
 }
 
 /* End-screen success/failure: responsive, never truncated, clear spacing above gif */
 .subheadline-end {
-  font-family: 'Press Start 2P', cursive;
-  font-size: clamp(12px, 3.5vw, 16px);
-  font-weight: 400;
-  color: #000;
-  margin: 0 1rem 24px;
-  padding: 0 0.5rem;
+  font-family: var(--font-display);
+  font-size: var(--font-size-subheadline-end);
+  font-weight: var(--font-weight-normal);
+  color: var(--color-text-end);
+  margin: 0 var(--space-sentence-sides) var(--space-sentence-to-gif);
+  padding: 0 var(--space-sentence-pad);
   text-align: center;
-  max-width: min(360px, 95vw);
-  line-height: 1.6;
+  max-width: min(var(--max-width-subheadline), 95vw);
+  line-height: var(--line-height-body);
   overflow: visible;
 }
 
 .score-board {
   display: flex;
-  gap: 2rem;
+  gap: var(--space-score-board-gap);
   flex-wrap: wrap;
   justify-content: center;
   max-width: 560px;
-  min-height: 200px;
+  min-height: var(--space-score-board-min);
   contain: layout;
 }
 
 /* Pixel style counter */
 .player {
-  font-family: 'Press Start 2P', cursive;
-  background: #fff;
-  border: 3px solid #333;
-  border-radius: 0;
-  padding: 1.5rem 1.5rem;
+  font-family: var(--font-display);
+  background: var(--color-player-bg);
+  border: var(--border-width) var(--border-style) var(--color-border);
+  border-radius: var(--radius-none);
+  padding: var(--space-player-pad);
   min-width: 200px;
   text-align: center;
-  box-shadow: 4px 4px 0 #333;
+  box-shadow: var(--shadow-offset) var(--color-border);
 }
 
 .player h2 {
-  font-size: 0.8125rem;  /* section labels: Cats / Dogs */
-  font-weight: 400;
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-normal);
   text-transform: uppercase;
-  letter-spacing: 0.02em;
-  margin: 0 0 1rem;
-  color: #333;
-  line-height: 1.6;
+  letter-spacing: var(--letter-spacing-label);
+  margin: 0 0 var(--space-label-bottom);
+  color: var(--color-text);
+  line-height: var(--line-height-body);
 }
 
 /* Fixed width so digit changes (0→1→2→3) don't shift the counter layout */
 .score {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 2.5rem;
-  font-weight: 400;
-  margin: 0 0 1rem;
-  color: #222;
-  line-height: 1.5;
+  font-family: var(--font-display);
+  font-size: var(--font-size-score);
+  font-weight: var(--font-weight-normal);
+  margin: 0 0 var(--space-score-bottom);
+  color: var(--color-text-dark);
+  line-height: var(--line-height-tight);
   font-variant-numeric: tabular-nums;
   width: 2ch;
   min-width: 2ch;
@@ -344,20 +448,20 @@ h1 {
 
 .controls {
   display: flex;
-  gap: 0.75rem;
+  gap: var(--space-controls-gap);
   justify-content: center;
 }
 
 button {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 0.875rem;  /* level 5: primary buttons */
-  font-weight: 400;
-  border: 3px solid #333;
-  border-radius: 0;
-  padding: 0.6rem 1rem;
+  font-family: var(--font-display);
+  font-size: var(--font-size-btn);
+  font-weight: var(--font-weight-normal);
+  border: var(--border-width) var(--border-style) var(--color-border);
+  border-radius: var(--radius-none);
+  padding: var(--space-btn-pad-y) var(--space-btn-pad-x);
   cursor: pointer;
   transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.2s ease;
-  box-shadow: 3px 3px 0 #333;
+  box-shadow: var(--shadow-offset-sm) var(--color-border);
 }
 
 button:active {
@@ -371,29 +475,29 @@ button:disabled {
 }
 
 .btn-add {
-  background: #e94560;
-  color: #fff;
+  background: var(--color-accent);
+  color: var(--color-bg);
 }
 
 .btn-add:hover {
-  background: #ff6b6b;
+  background: var(--color-accent-hover);
 }
 
 .btn-add:active {
   transform: translate(2px, 2px);
-  box-shadow: 1px 1px 0 #333;
+  box-shadow: var(--shadow-offset-xxs) var(--color-border);
 }
 
 .btn-subtract {
-  background: #c0c0c0;
-  color: #000;
-  border: 3px solid #333;
+  background: var(--color-btn-subtract);
+  color: var(--color-text-end);
+  border: var(--border-width) var(--border-style) var(--color-border);
   -webkit-text-stroke: 1px currentColor;
   paint-order: stroke fill;
 }
 
 .btn-subtract:hover {
-  background: #d0d0d0;
+  background: var(--color-btn-subtract-hover);
 }
 
 .btn-subtract:focus {
@@ -401,21 +505,21 @@ button:disabled {
 }
 
 .btn-subtract:focus-visible {
-  outline: 2px solid #333;
-  outline-offset: 2px;
+  outline: var(--outline-width) var(--border-style) var(--color-border);
+  outline-offset: var(--outline-offset);
 }
 
 .btn-subtract:active {
   transform: translate(2px, 2px);
-  box-shadow: 1px 1px 0 #333;
+  box-shadow: var(--shadow-offset-xxs) var(--color-border);
 }
 
 .guess-success-message {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 0.75rem;   /* level 6: inline feedback */
+  font-family: var(--font-display);
+  font-size: var(--font-size-guess);
   text-align: center;
-  color: #333;
-  line-height: 1;
+  color: var(--color-text);
+  line-height: var(--line-height-solid);
 }
 
 .guess-success-message[hidden] {
@@ -439,8 +543,8 @@ button:disabled {
 }
 
 .bravo-wrap {
-  margin: 0 0 1.5rem;
-  min-height: 2.5rem;
+  margin: 0 0 var(--space-section);
+  min-height: var(--space-bravo-min);
   text-align: center;
   position: relative;
 }
@@ -465,43 +569,43 @@ button:disabled {
 }
 
 .bravo-message {
-  font-family: 'Press Start 2P', cursive;
+  font-family: var(--font-display);
   position: relative;
   z-index: 10000;
   margin: 0;
-  font-size: 1.125rem;  /* level 3b: celebration */
-  font-weight: 400;
-  color: #e94560;
-  line-height: 1.6;
+  font-size: var(--font-size-bravo);
+  font-weight: var(--font-weight-normal);
+  color: var(--color-accent);
+  line-height: var(--line-height-body);
 }
 
 .start-wrap {
-  margin: 0 0 1.5rem;
+  margin: 0 0 var(--space-start-wrap-bottom);
   text-align: center;
 }
 
 .btn-start {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 0.875rem;  /* level 5: primary CTA */
-  background: #e94560;
-  color: #fff;
-  border: 3px solid #333;
-  border-radius: 0;
-  padding: 0.75rem 1.5rem;
-  box-shadow: 4px 4px 0 #333;
+  font-family: var(--font-display);
+  font-size: var(--font-size-btn);
+  background: var(--color-accent);
+  color: var(--color-bg);
+  border: var(--border-width) var(--border-style) var(--color-border);
+  border-radius: var(--radius-none);
+  padding: var(--space-btn-cta-pad);
+  box-shadow: var(--shadow-offset) var(--color-border);
 }
 
 .btn-start:hover {
-  background: #f06078;
+  background: var(--color-accent-cta-hover);
 }
 
 .btn-start:active {
   transform: translate(2px, 2px);
-  box-shadow: 2px 2px 0 #333;
+  box-shadow: var(--shadow-offset-xs) var(--color-border);
 }
 
 .reset-wrap {
-  margin-top: 1rem;
+  margin-top: var(--space-reset-top);
 }
 
 .reset-wrap[hidden] {
@@ -509,23 +613,23 @@ button:disabled {
 }
 
 .btn-reset {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 0.875rem;
-  background: #e94560;
-  color: #fff;
-  border: 3px solid #333;
-  border-radius: 0;
-  padding: 0.75rem 1.5rem;
-  box-shadow: 4px 4px 0 #333;
+  font-family: var(--font-display);
+  font-size: var(--font-size-btn);
+  background: var(--color-accent);
+  color: var(--color-bg);
+  border: var(--border-width) var(--border-style) var(--color-border);
+  border-radius: var(--radius-none);
+  padding: var(--space-btn-cta-pad);
+  box-shadow: var(--shadow-offset) var(--color-border);
 }
 
 .btn-reset:hover {
-  background: #f06078;
+  background: var(--color-accent-cta-hover);
 }
 
 .btn-reset:active {
   transform: translate(2px, 2px);
-  box-shadow: 2px 2px 0 #333;
+  box-shadow: var(--shadow-offset-xs) var(--color-border);
 }
 
 @media (max-width: 768px) {
@@ -544,7 +648,7 @@ button:disabled {
 
   .subheadline-end {
     font-size: clamp(11px, 3vw, 14px);
-    margin: 0 0.75rem 28px;
+    margin: 0 0.75rem 28px; /* responsive override: more space on small screens */
     max-width: min(320px, 92vw);
   }
 
@@ -558,17 +662,17 @@ button:disabled {
     width: 44vw;
     min-width: 44vw;
     max-width: 44vw;
-    height: calc(44vw + 32px);
-    min-height: calc(44vw + 32px);
+    height: calc(44vw + var(--space-countdown-bar));
+    min-height: calc(44vw + var(--space-countdown-bar));
   }
 
   .game-slot-play {
-    min-height: calc(44vw + 32px);
+    min-height: calc(44vw + var(--space-countdown-bar));
   }
 
   .score-board {
     flex-wrap: nowrap;
-    gap: 0.5rem;
+    gap: var(--space-gap-md);
     max-width: 100%;
     width: 100%;
   }
