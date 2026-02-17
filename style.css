@@ -19,6 +19,7 @@ body {
 body.center-pre-game {
   justify-content: center;
   padding: 24px;
+  padding-top: 88px;
 }
 
 body.center-pre-game .game-slot {
