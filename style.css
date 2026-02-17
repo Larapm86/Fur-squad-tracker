@@ -18,8 +18,7 @@ body {
 /* Start screen and 3-2-1 countdown: center block in the middle of the screen */
 body.center-pre-game {
   justify-content: center;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+  padding: 24px;
 }
 
 body.center-pre-game .game-slot {
@@ -115,6 +114,22 @@ body.end-screen .header-image-slot .header-image-placeholder:not([hidden]) {
   transform-origin: center center;
 }
 
+/* Plant and nyan cat gifs positioned lower in the slot */
+.game-slot-play #header-plant {
+  transform: translateY(15%);
+  transform-origin: center center;
+}
+
+.game-slot-play #header-catnap {
+  transform: translateY(15%);
+  transform-origin: center center;
+}
+
+body.end-screen .game-slot-play #header-plant {
+  transform: scale(1.2) translateY(15%);
+  transform-origin: center center;
+}
+
 body.end-screen .game-slot-play .header-countdown-wrap {
   order: 2;
 }
@@ -125,8 +140,9 @@ body.end-screen .game-slot {
 }
 
 /* 3, 2, 1 countdown centered in the middle of the slot */
+/* 3, 2, 1 countdown centered in the viewport */
 .countdown-overlay {
-  position: absolute;
+  position: fixed;
   inset: 0;
   display: flex;
   align-items: center;
@@ -136,6 +152,7 @@ body.end-screen .game-slot {
   font-size: 3rem;
   color: #333;
   pointer-events: none;
+  z-index: 5;
 }
 
 .countdown-overlay[hidden] {
@@ -483,7 +500,7 @@ button:disabled {
 }
 
 .reset-wrap {
-  margin-top: 2.5rem;
+  margin-top: 1rem;
 }
 
 .reset-wrap[hidden] {
